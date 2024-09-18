@@ -1,14 +1,17 @@
 import mongoose from "mongoose";
 
 type UserSchemaType = {
-    name: string,
+    auth0Id: string,
+    name?: string,
     email: string,
-    password: string
+    password?: string
 }
 const UserSchema = new mongoose.Schema<UserSchemaType>({
+    auth0Id: {
+        type: String
+    },
     name: {
         type: String,
-        required: true
     },
     email: {
         type: String,
@@ -17,7 +20,6 @@ const UserSchema = new mongoose.Schema<UserSchemaType>({
     },
     password: {
         type: String,
-        required: true
     }
 
 }, { timestamps: true })

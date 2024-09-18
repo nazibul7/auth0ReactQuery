@@ -6,8 +6,8 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
         console.log(req.body);
 
         const token = req.body.did
-        console.log(token);
-        res.json({data:req.body, "token": token})
+        console.log(token)
+        res.json({ data: req.body, "token": token })
     } catch (error) {
         console.log(error);
 

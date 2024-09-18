@@ -7,14 +7,18 @@ import { auth } from "express-oauth2-jwt-bearer"
 
 const app = express()
 
-console.log(process.env.AUDIENCE, process.env.ISSUEER_BASE_URL);
-
-app.use(auth({
-    audience:process.env.AUDIENCE,
-    issuerBaseURL:process.env.ISSUEER_BASE_URL
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: ['POST', 'GET', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
-app.use(cors())
+const checkJwt = auth({
+    audience: process.env.AUDIENCE,
+    issuerBaseURL: process.env.ISSUEER_BASE_URL,
+    tokenSigningAlg: 'RS256'
+})
 app.use(express.json())
+app.use(checkJwt)
 app.use('/api/v1/user', userRoutes)
 
 mongoose.connect(`${process.env.MONGODB_URI}`).then(() => {
