@@ -4,6 +4,6 @@ import { verifyJwt } from "../middlewares/auth"
 
 const router = express.Router()
 
-router.post('/register', verifyJwt, registerUser)
+router.post('/register', registerUser)
 
 export default router

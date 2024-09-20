@@ -8,10 +8,11 @@ type UserSchemaType = {
 }
 const UserSchema = new mongoose.Schema<UserSchemaType>({
     auth0Id: {
-        type: String
+        type: String,
+        required:true
     },
     name: {
-        type: String,
+        type: String
     },
     email: {
         type: String,

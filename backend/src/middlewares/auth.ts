@@ -13,8 +13,7 @@ declare global {
 
 export const verifyJwt = async (req: Request, res: Response, next: NextFunction) => {
     const { authorization } = req.headers
-    console.log("Authorization ",authorization);
-    
+
     if (!authorization || !authorization.startsWith('Bearer ')) {
         return res.sendStatus(401);
     }
@@ -24,7 +23,8 @@ export const verifyJwt = async (req: Request, res: Response, next: NextFunction)
         const auth0Id = decoded.sub;
 
         const user = await User.findOne({ auth0Id });
-
+        console.log(user);
+        
         if (!user) {
             return res.sendStatus(401);
         }
